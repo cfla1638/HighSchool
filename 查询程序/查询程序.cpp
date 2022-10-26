@@ -14,19 +14,19 @@ typedef struct UserData
 	string userNum;
 	string otherInfo;
 	UserData *next;
-}UserData;
+} UserData;
 
 typedef struct
 {
 	string userName;
 	UserData *data;
-}UserList[USER_COUNT];
+} UserList[USER_COUNT];
 
 typedef struct
 {
 	UserList list;
 	int userCount;
-}UserTable;
+} UserTable;
 
 //函数声明
 void ReadFile(UserTable &T);
@@ -35,7 +35,7 @@ void ShowAll(UserTable T);
 bool OneInList(UserTable T, string userName);
 int LocateUser(UserTable T, string userName);
 
-//主函数
+//主函�?
 int main(int argc, char const *argv[])
 {
 	UserTable T;
@@ -43,36 +43,37 @@ int main(int argc, char const *argv[])
 
 	ReadFile(T);
 
-	cout<<"please input your name:";
-	cin>>userName;
+	cout << "please input your name:";
+	cin >> userName;
 	if (!OneInList(T, userName))
 	{
-		cout<<endl<<"Can Not Find This Name!"<<endl;
+		cout << endl
+			 << "Can Not Find This Name!" << endl;
 		getch();
 		return 0;
 	}
-	FindUser(T,userName);
+	FindUser(T, userName);
 
 	getch();
 	return 0;
 }
 
-
 void ShowAll(UserTable T)
 {
 	for (int i = 0; i < T.userCount; ++i)
 	{
-		UserData *point=T.list[i].data;
+		UserData *point = T.list[i].data;
 
-		cout<<"Name:"<<"\t"<<T.list[i].userName<<endl;
+		cout << "Name:"
+			 << "\t" << T.list[i].userName << endl;
 		while (point != NULL)
 		{
-			cout<<"Num:"<<"\t"<<point->userNum<<endl;
-			point=point->next;
+			cout << "Num:"
+				 << "\t" << point->userNum << endl;
+			point = point->next;
 		}
 	}
 }
-
 
 void FindUser(UserTable T, string userName)
 {
@@ -80,30 +81,33 @@ void FindUser(UserTable T, string userName)
 	{
 		if (T.list[i].userName == userName)
 		{
-			int seqNum=1;
-			UserData *point=T.list[i].data;
+			int seqNum = 1;
+			UserData *point = T.list[i].data;
 
-			cout<<"Name:"<<"\t"<<T.list[i].userName<<endl<<endl;
+			cout << "Name:"
+				 << "\t" << T.list[i].userName << endl
+				 << endl;
 			while (point != NULL)
 			{
 				if (point->otherInfo != "*")
 				{
-					cout<<seqNum<<"\t";
-					cout<<"Num:"<<"\t"<<point->userNum;
-					cout<<"\totherInfo:\t"<<point->otherInfo<<endl;
+					cout << seqNum << "\t";
+					cout << "Num:"
+						 << "\t" << point->userNum;
+					cout << "\totherInfo:\t" << point->otherInfo << endl;
 				}
 				else
 				{
-					cout<<seqNum<<"\t";
-					cout<<"Num:"<<"\t"<<point->userNum<<endl;
+					cout << seqNum << "\t";
+					cout << "Num:"
+						 << "\t" << point->userNum << endl;
 				}
 				seqNum++;
-				point=point->next;
+				point = point->next;
 			}
 		}
 	}
 }
-
 
 void ReadFile(UserTable &T)
 {
@@ -124,7 +128,7 @@ void ReadFile(UserTable &T)
 
 		if (OneInList(T, userName))
 		{
-			int x=LocateUser(T, userName);
+			int x = LocateUser(T, userName);
 
 			T.list[x].userName = userName;
 
@@ -147,9 +151,9 @@ void ReadFile(UserTable &T)
 			data->next = T.list[i].data;
 			T.list[i].data = data;
 			T.userCount++;
-			//cout<<T.list[i].data->userNum<<endl;
-			//cout<<T.list[i].data->otherInfo<<endl;
-			//system("pause");
+			// cout<<T.list[i].data->userNum<<endl;
+			// cout<<T.list[i].data->otherInfo<<endl;
+			// system("pause");
 
 			i++;
 		}
@@ -157,12 +161,11 @@ void ReadFile(UserTable &T)
 	fclose(fp);
 }
 
-
 bool OneInList(UserTable T, string userName)
 {
 	for (int i = 0; i < T.userCount; ++i)
 	{
-		if(T.list[i].userName == userName)
+		if (T.list[i].userName == userName)
 		{
 			return true;
 		}
@@ -170,12 +173,11 @@ bool OneInList(UserTable T, string userName)
 	return false;
 }
 
-
 int LocateUser(UserTable T, string userName)
 {
 	for (int i = 0; i < T.userCount; ++i)
 	{
-		if(T.list[i].userName == userName)
+		if (T.list[i].userName == userName)
 		{
 			return i;
 		}
